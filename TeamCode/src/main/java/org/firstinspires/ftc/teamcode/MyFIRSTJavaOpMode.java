@@ -23,6 +23,11 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
+        System.out.println("Front Left Motor: " + frontLeft);
+        System.out.println("Front Right Motor: " + frontRight);
+        System.out.println("Back Left Motor: " + backLeft);
+        System.out.println("Back Right Motor: " + backRight);
+
 
         waitForStart();
 
@@ -39,6 +44,8 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
             backLeft.setPower(lStickY - lStickX - rStickX);
             frontRight.setPower(-lStickY - lStickX - rStickX);
             backRight.setPower(-lStickY + lStickX - rStickX);
+
+            System.out.println("Running Teleop");
 
 
         }
