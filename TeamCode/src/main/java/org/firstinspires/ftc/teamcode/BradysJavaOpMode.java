@@ -70,7 +70,7 @@ public class BradysJavaOpMode extends LinearOpMode {
                 telemetry.addData("Gamepad 1", "Connected");
             }
 
-            telemetry.update();
+            telemetry.update(); //add telemetry data above this line
 
 
 
