@@ -56,7 +56,6 @@ public class BradysJavaOpMode extends LinearOpMode {
 
 
         waitForStart(); //Waits until Drivers presses Start
-
         while (opModeIsActive()) {
 
             telemetry.addData("Status","OpMode Running");
