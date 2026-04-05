@@ -119,7 +119,8 @@ public class BradysJavaOpMode extends LinearOpMode {
             }
             if (gamepad1.id == Gamepad.ID_UNASSOCIATED) {
                 telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
-            } else {
+            }
+            else {
                 telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
             }
 
