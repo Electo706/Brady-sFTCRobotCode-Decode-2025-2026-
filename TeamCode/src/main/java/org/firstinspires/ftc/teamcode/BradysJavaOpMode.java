@@ -22,55 +22,65 @@ public class BradysJavaOpMode extends LinearOpMode {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
-        //intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        //launcherRight = hardwareMap.get(DcMotor.class, "launcherRight");
-        //launcherLeft = hardwareMap.get(DcMotor.class, "launcherLeft");
+        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+        launcherRight = hardwareMap.get(DcMotor.class, "launcherRight");
+        launcherLeft = hardwareMap.get(DcMotor.class, "launcherLeft");
 
-        frontLeft.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
+            frontLeft.setDirection(DcMotor.Direction.FORWARD);
+            backLeft.setDirection(DcMotor.Direction.REVERSE);
+            frontRight.setDirection(DcMotor.Direction.REVERSE);
+            backRight.setDirection(DcMotor.Direction.FORWARD);
 
-        VoltageSensor voltageSensor = hardwareMap.voltageSensor.iterator().next();
-        double batteryVoltage = voltageSensor.getVoltage();
+                VoltageSensor voltageSensor = hardwareMap.voltageSensor.iterator().next();
+                double batteryVoltage = voltageSensor.getVoltage();
 
+        telemetry.addData("Battery Voltage", "%.2f V", batteryVoltage); //Sends Voltage of Robot to Telemetry
         telemetry.addData("Status", "Initialized"); //sends "Initialized" to Telemetry
          if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
              telemetry.addData("WARNING", "Battery Low");
          }
 
-         telemetry.addData("Battery Voltage", "%.2f V", batteryVoltage); //Sends Voltage of Robot to Telemetry
 
-        telemetry.addData("Front Left Motor: ", frontLeft.getPower());
-        telemetry.addData("Front Right Motor: ", frontRight.getPower());
-        telemetry.addData("Back Left Motor: ", backLeft.getPower());
-        telemetry.addData("Back Right Motor: ", backRight.getPower());
+             if  (gamepad1.id == Gamepad.ID_UNASSOCIATED ) {
+                 telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
+             } else {
+                 telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
+             }
 
-        if  (gamepad1.id == Gamepad.ID_UNASSOCIATED ) {
-            telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
-        } else {
-            telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
-         }
+                 telemetry.addData("Front Left Motor Power: ", frontLeft.getPower());
+                 telemetry.addData("Front Right Motor Power: ", frontRight.getPower());
+                 telemetry.addData("Back Left Motor Power: ", backLeft.getPower());
+                 telemetry.addData("Back Right Motor Power: ", backRight.getPower());
+                 telemetry.addData("Launcher Power: ", (launcherLeft.getPower() + launcherRight.getPower()/2));
+                 telemetry.addData("Intake Power: ", intakeMotor.getPower());
 
-        telemetry.update(); // add more telemetry data above this line
+                    telemetry.update(); // add more telemetry data above this line
 
 
         waitForStart(); //Waits until Drivers presses Start
         while (opModeIsActive()) {
+            telemetry.addData("Battery Voltage", "%.2f V", batteryVoltage); //Sends Voltage of Robot to Telemetry
 
-            telemetry.addData("Status","OpMode Running");
-            telemetry.addData("Front Left Motor: ", frontLeft.getPower());
-            telemetry.addData("Front Right Motor: ", frontRight.getPower());
-            telemetry.addData("Back Left Motor: ", backLeft.getPower());
-            telemetry.addData("Back Right Motor: ", backRight.getPower());
+                telemetry.addData("Status", "Initialized"); //sends "Initialized" to Telemetry
+                if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
+                    telemetry.addData("WARNING", "Battery Low");
+                }
 
-            if  (gamepad1.id == Gamepad.ID_UNASSOCIATED ) {
-                telemetry.addData("Gamepad 1", "Disconnected");
-            } else {
-                telemetry.addData("Gamepad 1", "Connected");
-            }
 
-            telemetry.update(); //add telemetry data above this line
+                    if  (gamepad1.id == Gamepad.ID_UNASSOCIATED ) {
+                        telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
+                    } else {
+                        telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
+                    }
+
+                        telemetry.addData("Front Left Motor Power: ", frontLeft.getPower());
+                        telemetry.addData("Front Right Motor Power: ", frontRight.getPower());
+                        telemetry.addData("Back Left Motor Power: ", backLeft.getPower());
+                        telemetry.addData("Back Right Motor Power: ", backRight.getPower());
+                        telemetry.addData("Launcher Power: ", (launcherLeft.getPower() + launcherRight.getPower()/2));
+                        telemetry.addData("Intake Power: ", intakeMotor.getPower());
+
+                            telemetry.update(); // add more telemetry data above this line
 
 
 
@@ -79,22 +89,38 @@ public class BradysJavaOpMode extends LinearOpMode {
             double rStickX = gamepad1.right_stick_x;
             double rStickY = gamepad1.right_stick_y;
 
-            boolean lBumper = gamepad1.left_bumper; // Bumpers (true or false)
-            boolean rBumper = gamepad1.right_bumper;
+                boolean lBumper = gamepad1.left_bumper; // Bumpers (true or false)
+                boolean rBumper = gamepad1.right_bumper;
 
-            double lTrigger = gamepad1.left_trigger; //Triggers (decimal values)
-            double rTrigger = gamepad1.right_trigger;
+                    double lTrigger = gamepad1.left_trigger; //Triggers (decimal values)
+                    double rTrigger = gamepad1.right_trigger;
 
-            boolean aButton = gamepad1.a; // X on DualSense
-            boolean bButton = gamepad1.b; // Circle on DualSense
-            boolean xButton = gamepad1.x; // Square on DualSense
-            boolean yButton = gamepad1.y; // Triangle on DualSense
+                        boolean aButton = gamepad1.a; // X on DualSense
+                        boolean bButton = gamepad1.b; // Circle on DualSense
+                        boolean xButton = gamepad1.x; // Square on DualSense
+                        boolean yButton = gamepad1.y; // Triangle on DualSense
 
 
             frontLeft.setPower(lStickY + lStickX - rStickX); //Calculations for DriveTrain Motors
             backLeft.setPower(lStickY - lStickX - rStickX);
             frontRight.setPower(-lStickY - lStickX - rStickX);
             backRight.setPower(-lStickY + lStickX - rStickX);
+
+                launcherLeft.setPower(-lTrigger + rTrigger); //launcher calculations :)
+                launcherRight.setPower(lTrigger - rTrigger);
+
+                    if(rBumper) { //Most beautiful calculations for intake ever >:)
+                        intakeMotor.setPower(0.5);
+                    }
+                    else {
+                        intakeMotor.setPower(0.0);
+                    }
+                    if(lBumper) {
+                        intakeMotor.setPower(-0.5);
+                    }
+                    else {
+                        intakeMotor.setPower(0.0);
+                    }
 
 
 
