@@ -34,6 +34,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
 
         VoltageSensor voltageSensor = hardwareMap.voltageSensor.iterator().next();
         double batteryVoltage = voltageSensor.getVoltage();
+
         telemetry.addData("Status", "Initialized"); //sends "Initialized" to Telemetry
          if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
              telemetry.addData("WARNING", "Battery Low");
@@ -44,6 +45,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         telemetry.addData("Front Right Motor: ", frontRight.getPower());
         telemetry.addData("Back Left Motor: ", backLeft.getPower());
         telemetry.addData("Back Right Motor: ", backRight.getPower());
+
         if  (gamepad1.id == Gamepad.ID_UNASSOCIATED ) {
             telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
         } else {
@@ -55,17 +57,21 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         waitForStart(); //Waits until Drivers presses Start
 
         while (opModeIsActive()) {
+
             telemetry.addData("Status","OpMode Running");
             telemetry.addData("Front Left Motor: ", frontLeft.getPower());
             telemetry.addData("Front Right Motor: ", frontRight.getPower());
             telemetry.addData("Back Left Motor: ", backLeft.getPower());
             telemetry.addData("Back Right Motor: ", backRight.getPower());
+
             if  (gamepad1.id == Gamepad.ID_UNASSOCIATED ) {
                 telemetry.addData("Gamepad 1", "Disconnected");
             } else {
                 telemetry.addData("Gamepad 1", "Connected");
             }
+
             telemetry.update();
+
 
 
             double lStickY = gamepad1.left_stick_y; //Stick Controls (decimal values)
