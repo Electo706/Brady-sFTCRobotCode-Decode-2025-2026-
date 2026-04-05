@@ -108,39 +108,44 @@ public class BradysJavaOpMode extends LinearOpMode {
             } else {
                 intakeMotor.setVelocity(0);
             }
-            if (((launcherRightRPM + launcherLeftRPM)/2) =>5400) {
-                gamepad1.setLedColor(0, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);   /* if launcher rpm is above 5400rpm then it
+            if (launcherLeftRPM >= 5400) {
+                gamepad1.setLedColor(0, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);
+                gamepad2.setLedColor(0,255,0, Gamepad.LED_DURATION_CONTINUOUS);
+            } else {
+                // Optional: Turn the LED off or change color if it's NOT ready
+                gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
+                gamepad2.setLedColor(255,0,0, Gamepad. LED_DURATION_CONTINUOUS);
+            }   /* if launcher rpm is above 5400rpm then it
             switchers the LED on the controller to green to indicate It's ready to launch the artifact  */
-            //===============================================================================================//
-            //=========================================Telemetry Data========================================//
-            //===============================================================================================//
+                //===============================================================================================//
+                //=========================================Telemetry Data========================================//
+                //===============================================================================================//
 
-            //telemetry.addData("Battery Voltage", "%.2f V", batteryVoltage); //Sends Voltage of Robot to Telemetry
-            telemetry.addData("Status", "OpModeRunning");
-            if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
-                telemetry.addData("WARNING", "Battery Low");
+                //telemetry.addData("Battery Voltage", "%.2f V", batteryVoltage); //Sends Voltage of Robot to Telemetry
+                telemetry.addData("Status", "OpModeRunning");
+                if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
+                    telemetry.addData("WARNING", "Battery Low");
+                }
+                if (gamepad1.id == Gamepad.ID_UNASSOCIATED) {
+                    telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
+                } else {
+                    telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
+                }
+
+                telemetry.addData("FrontLeftMotorPower: ", frontLeft.getPower());
+                telemetry.addData("FrontRightMotorPower: ", frontRight.getPower());
+                telemetry.addData("BackLeftMotorPower: ", backLeft.getPower());
+                telemetry.addData("BackRightMotorPower: ", backRight.getPower());
+                telemetry.addData("LauncherRightPower: ", launcherRight.getPower());
+                telemetry.addData("LauncherLeftPower: ", launcherLeft.getPower());
+                telemetry.addData("LauncherRightRPM: ", launcherRightRPM);
+                telemetry.addData("LauncherLeftRPM: ", launcherLeftRPM);
+                telemetry.addData("IntakePower: ", intakeMotor.getPower());
+                telemetry.addData("IntakeRPM: ", intakeRPM);
+
+                telemetry.update(); // add more telemetry data above this line
+
+
             }
-            if (gamepad1.id == Gamepad.ID_UNASSOCIATED) {
-                telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
-            }
-            else {
-                telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
-            }
-
-            telemetry.addData("FrontLeftMotorPower: ", frontLeft.getPower());
-            telemetry.addData("FrontRightMotorPower: ", frontRight.getPower());
-            telemetry.addData("BackLeftMotorPower: ", backLeft.getPower());
-            telemetry.addData("BackRightMotorPower: ", backRight.getPower());
-            telemetry.addData("LauncherRightPower: ", launcherRight.getPower());
-            telemetry.addData("LauncherLeftPower: ", launcherLeft.getPower());
-            telemetry.addData("LauncherRightRPM: ", launcherRightRPM);
-            telemetry.addData("LauncherLeftRPM: ", launcherLeftRPM);
-            telemetry.addData("IntakePower: ", intakeMotor.getPower());
-            telemetry.addData("IntakeRPM: ", intakeRPM);
-
-            telemetry.update(); // add more telemetry data above this line
-
-
         }
     }
-}
