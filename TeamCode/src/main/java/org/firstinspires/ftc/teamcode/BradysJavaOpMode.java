@@ -52,7 +52,7 @@ public class BradysJavaOpMode extends LinearOpMode {
             telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
          }
 
-        telemetry.update();
+        telemetry.update(); // add more telemetry data above this line
 
 
         waitForStart(); //Waits until Drivers presses Start
