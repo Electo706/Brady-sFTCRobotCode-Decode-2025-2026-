@@ -95,10 +95,12 @@ public class BradysJavaOpMode extends LinearOpMode {
             frontRight.setPower(-lStickY - lStickX - rStickX);
             backRight.setPower(-lStickY + lStickX - rStickX);
 
-            launcherRight.setVelocity((rTriggerValue * 2800) - (lTriggerValue * 2800));
+            launcherRight.setVelocity((rTriggerValue * 2800) - (lTriggerValue * 2800)); //Velocity math
             launcherLeft.setVelocity(-(lTriggerValue * 2800) + rTriggerValue * 2800);
-            launcherRightRPM = (launcherRight.getVelocity() / 28 * 60);
+            launcherRightRPM = (launcherRight.getVelocity() / 28 * 60); //Cals again
             launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
+            intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
+
             if (rBumper) { //Most beautiful calculations for intake ever >:)
                 intakeMotor.setVelocity(1393.8125);
             } else if (lBumper) {
