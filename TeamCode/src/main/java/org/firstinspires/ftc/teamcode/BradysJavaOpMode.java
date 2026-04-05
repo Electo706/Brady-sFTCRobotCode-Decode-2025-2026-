@@ -108,6 +108,9 @@ public class BradysJavaOpMode extends LinearOpMode {
             } else {
                 intakeMotor.setVelocity(0);
             }
+            if (((launcherRightRPM + launcherLeftRPM)/2) =>5400) {
+                gamepad1.setLedColor(0, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);   /* if launcher rpm is above 5400rpm then it
+            switchers the LED on the controller to green to indicate It's ready to launch the artifact  */
             //===============================================================================================//
             //=========================================Telemetry Data========================================//
             //===============================================================================================//
