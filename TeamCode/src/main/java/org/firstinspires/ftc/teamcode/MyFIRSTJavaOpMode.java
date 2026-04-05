@@ -39,6 +39,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
          if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
              telemetry.addData("WARNING", "Battery Low");
          }
+
          telemetry.addData("Battery Voltage", "%.2f V", batteryVoltage); //Sends Voltage of Robot to Telemetry
 
         telemetry.addData("Front Left Motor: ", frontLeft.getPower());
@@ -51,6 +52,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         } else {
             telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
          }
+
         telemetry.update();
 
 
