@@ -47,14 +47,14 @@ public class BradysJavaOpMode extends LinearOpMode {
                  telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
              }
 
-                 telemetry.addData("Front Left Motor Power: ", frontLeft.getPower());
-                 telemetry.addData("Front Right Motor Power: ", frontRight.getPower());
-                 telemetry.addData("Back Left Motor Power: ", backLeft.getPower());
-                 telemetry.addData("Back Right Motor Power: ", backRight.getPower());
-                 telemetry.addData("Launcher Power: ", (launcherLeft.getPower() + launcherRight.getPower()/2));
-                 telemetry.addData("Intake Power: ", intakeMotor.getPower());
+                     telemetry.addData("Front Left Motor Power: ", frontLeft.getPower());
+                     telemetry.addData("Front Right Motor Power: ", frontRight.getPower());
+                     telemetry.addData("Back Left Motor Power: ", backLeft.getPower());
+                     telemetry.addData("Back Right Motor Power: ", backRight.getPower());
+                     telemetry.addData("Launcher Power: ", (launcherLeft.getPower() + launcherRight.getPower()/2));
+                     telemetry.addData("Intake Power: ", intakeMotor.getPower());
 
-                    telemetry.update(); // add more telemetry data above this line
+                        telemetry.update(); // add more telemetry data above this line
 
 
         waitForStart(); //Waits until Drivers presses Start
