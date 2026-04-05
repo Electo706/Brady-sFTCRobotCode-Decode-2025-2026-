@@ -3,13 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 
 @TeleOp(name = "Basic Drive", group = "Test")
-public class MyFIRSTJavaOpMode extends LinearOpMode {
+public class BradysJavaOpMode extends LinearOpMode {
     private DcMotor frontLeft, frontRight;
     private DcMotor backLeft, backRight;
     private DcMotor intakeMotor;
