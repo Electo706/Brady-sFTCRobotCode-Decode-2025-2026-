@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 public class PIDFTuning extends OpMode {
     public DcMotorEx flywheelMotor;
 
-    public double highVelocity=1500;
-    public double lowVelocity=900;
+    public double highVelocity=2600;
+    public double lowVelocity=0;
     double curTargetVelocity = highVelocity;
     double F = 0;
     double P = 0;
@@ -46,7 +46,7 @@ public class PIDFTuning extends OpMode {
             else { curTargetVelocity = highVelocity; }
         }
 
-        if (gamepad1.backWasPressed()) {
+        if (gamepad1.bWasPressed()) {
             stepIndex = (stepIndex + 1) % stepSizes.length;
         }
 
@@ -70,7 +70,7 @@ public class PIDFTuning extends OpMode {
         //set velocity
         flywheelMotor.setVelocity(curTargetVelocity);
 
-        double curVelocity = flywheelMotor.getVelocity();
+        double curVelocity = -flywheelMotor.getVelocity();
         double error = curTargetVelocity - curVelocity;
 
         telemetry.addData("Target Velocity: ", curTargetVelocity);
