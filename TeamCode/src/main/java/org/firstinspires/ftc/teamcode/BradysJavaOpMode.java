@@ -41,6 +41,19 @@ public class BradysJavaOpMode extends LinearOpMode {
         double launcherRightRPM = (launcherRight.getVelocity() / 28 * 60);
         double launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
         double intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
+        double[] launcherSpeedSizes = {0, 280, 560, 840, 1120, 1400, 1680, 1960, 2240, 2520, 2800,};
+        int stepIndex = 0;
+
+
+
+
+
+
+
+
+
+
+
 
         //===============================================================================================//
         //=========================================Telemetry Data========================================//
@@ -72,6 +85,9 @@ public class BradysJavaOpMode extends LinearOpMode {
 
         telemetry.update(); // add more telemetry+ data above this line
 
+
+
+
         waitForStart(); //Waits until Drivers presses Start
         while (opModeIsActive()) {
             double lStickY = gamepad1.left_stick_y; //Stick Controls (decimal values)
@@ -82,12 +98,14 @@ public class BradysJavaOpMode extends LinearOpMode {
             boolean rBumper = gamepad1.right_bumper;
             double lTrigger = gamepad1.left_trigger; //Triggers (decimal values)
             double rTrigger = gamepad1.right_trigger;
-            boolean aButton = gamepad1.a; // X on DualSense
-            boolean bButton = gamepad1.b; // Circle on DualSense
+            boolean aButton = gamepad1.aWasPressed(); // X on DualSense
+            boolean bButton = gamepad1.bWasPressed(); // Circle on DualSense
             boolean xButton = gamepad1.x; // Square on DualSense
             boolean yButton = gamepad1.y; // Triangle on DualSense
             double rTriggerValue = gamepad1.right_trigger;
             double lTriggerValue = gamepad1.left_trigger;
+
+
 
 
             frontLeft.setPower(lStickY + lStickX - rStickX); //Calculations for DriveTrain Motors
@@ -95,9 +113,24 @@ public class BradysJavaOpMode extends LinearOpMode {
             frontRight.setPower(-lStickY - lStickX - rStickX);
             backRight.setPower(-lStickY + lStickX - rStickX);
 
-            launcherRight.setVelocity((rTriggerValue * 2800) - (lTriggerValue * 2800)); //Velocity math
-            launcherLeft.setVelocity(-(lTriggerValue * 2800) + rTriggerValue * 2800);
-            launcherRightRPM = (launcherRight.getVelocity() / 28 * 60); //Cals again
+
+
+            if (aButton) {
+                stepIndex = (stepIndex + 1) % launcherSpeedSizes.length;
+            }
+            if (bButton) {
+                stepIndex = (stepIndex - 1) % launcherSpeedSizes.length;
+            }
+            double currentSelectedLauncherVelocity = launcherSpeedSizes[stepIndex];
+
+
+            launcherRight.setVelocity(currentSelectedLauncherVelocity);//Velocity math
+            launcherLeft.setVelocity(-currentSelectedLauncherVelocity);
+
+
+
+
+            launcherRightRPM = (launcherRight.getVelocity() / 28 * 60); //Calculates rpm of intake and launcher motors
             launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
             intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
 
@@ -108,6 +141,7 @@ public class BradysJavaOpMode extends LinearOpMode {
             } else {
                 intakeMotor.setVelocity(0);
             }
+
             if (launcherLeftRPM >= 5400) {
                 gamepad1.setLedColor(0, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);
                 gamepad2.setLedColor(0,255,0, Gamepad.LED_DURATION_CONTINUOUS);
@@ -117,6 +151,19 @@ public class BradysJavaOpMode extends LinearOpMode {
                 gamepad2.setLedColor(255,0,0, Gamepad. LED_DURATION_CONTINUOUS);
             }   /* if launcher rpm is above 5400rpm then it
             switchers the LED on the controller to green to indicate It's ready to launch the artifact  */
+
+
+
+
+
+
+
+
+
+
+
+
+
                 //===============================================================================================//
                 //=========================================Telemetry Data========================================//
                 //===============================================================================================//
