@@ -134,6 +134,9 @@ public class BradysJavaOpMode extends LinearOpMode {
             launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
             intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
 
+
+
+
             if (rBumper) { //Most beautiful calculations for intake ever >:)
                 intakeMotor.setVelocity(1393.8125);
             } else if (lBumper) {
@@ -141,6 +144,9 @@ public class BradysJavaOpMode extends LinearOpMode {
             } else {
                 intakeMotor.setVelocity(0);
             }
+
+
+
 
             if (launcherLeftRPM >= 5400) {
                 gamepad1.setLedColor(0, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);
@@ -172,6 +178,8 @@ public class BradysJavaOpMode extends LinearOpMode {
                 telemetry.addData("Status", "OpModeRunning");
                 if (batteryVoltage < 12.0) { //if voltage is lower than 12V then it sends a warning
                     telemetry.addData("WARNING", "Battery Low");
+
+
                 }
                 if (gamepad1.id == Gamepad.ID_UNASSOCIATED) {
                     telemetry.addData("Gamepad 1", "Disconnected"); //If controller1 is Disconnected it sends "Disconnected" Telemetry
@@ -179,14 +187,24 @@ public class BradysJavaOpMode extends LinearOpMode {
                     telemetry.addData("Gamepad 1", "Connected"); //If controller1 is Connected it sends "Connected"
                 }
 
+
+
                 telemetry.addData("FrontLeftMotorPower: ", frontLeft.getPower());
                 telemetry.addData("FrontRightMotorPower: ", frontRight.getPower());
                 telemetry.addData("BackLeftMotorPower: ", backLeft.getPower());
                 telemetry.addData("BackRightMotorPower: ", backRight.getPower());
+
+
+
                 telemetry.addData("LauncherRightPower: ", launcherRight.getPower());
                 telemetry.addData("LauncherLeftPower: ", launcherLeft.getPower());
                 telemetry.addData("LauncherRightRPM: ", launcherRightRPM);
                 telemetry.addData("LauncherLeftRPM: ", launcherLeftRPM);
+                telemetry.addData("LauncherVelocityMode: ", stepIndex);
+                telemetry.addData("LauncherTargetVelocity: ", currentSelectedLauncherVelocity);
+
+
+
                 telemetry.addData("IntakePower: ", intakeMotor.getPower());
                 telemetry.addData("IntakeRPM: ", intakeRPM);
 
