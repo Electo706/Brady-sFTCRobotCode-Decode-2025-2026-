@@ -131,7 +131,7 @@ public class BradysJavaOpMode extends LinearOpMode {
             launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
             intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
 
-            //Most beautiful calculations for intake ever >:) ↓
+            //Most beautiful calculations for intake ever >:) ↓ (Don't try to change it)
             boolean lBumper = gamepad1.left_bumper; // Bumpers (true or false)
             boolean rBumper = gamepad1.right_bumper;
             if (rBumper) {
