@@ -118,11 +118,12 @@ public class ChimmyClankerV2TeleOp extends LinearOpMode {
                 stepIndex = (stepIndex - 1) % launcherSpeedSizes.length;
             }
             */
+            //Launcher Control (Gamepad right trigger)
             double currentSelectedLauncherVelocity = launcherSpeedSizes[stepIndex];
-            launcher.setVelocity(currentSelectedLauncherVelocity);
+            launcher.setVelocity(gamepad1.right_trigger * currentSelectedLauncherVelocity);
 
 
-            /* Calculations for Intake and Launcher RPM  ↓ */
+            /* Calculations for IntakeRPM  ↓ */
             launcherRPM = (launcher.getVelocity() / 28 * 60);
             intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
 
