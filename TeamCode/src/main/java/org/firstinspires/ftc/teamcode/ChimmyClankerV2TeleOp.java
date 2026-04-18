@@ -4,12 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 
 @TeleOp(name = "Basic Drive", group = "Test")
-public class BradysJavaOpMode extends LinearOpMode {
+public class ChimmyClankerV2TeleOp extends LinearOpMode {
     private DcMotor frontLeft, frontRight;
     private DcMotor backLeft, backRight;
     private DcMotorEx intakeMotor;
