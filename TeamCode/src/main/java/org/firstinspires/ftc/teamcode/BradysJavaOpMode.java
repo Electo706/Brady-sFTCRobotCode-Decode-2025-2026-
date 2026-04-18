@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 
@@ -12,7 +13,7 @@ public class BradysJavaOpMode extends LinearOpMode {
     private DcMotor frontLeft, frontRight;
     private DcMotor backLeft, backRight;
     private DcMotorEx intakeMotor;
-    private DcMotorEx launcherRight, launcherLeft;
+    private DcMotorEx launcher;
 
 
     @Override
@@ -24,22 +25,21 @@ public class BradysJavaOpMode extends LinearOpMode {
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
-        launcherRight = hardwareMap.get(DcMotorEx.class, "launcherRight");
-        launcherLeft = hardwareMap.get(DcMotorEx.class, "launcherLeft");
+        launcher = hardwareMap.get(DcMotorEx.class, "launcher");
 
         //Intake and Launcher RunMode
         intakeMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        launcherLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        launcherRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        launcher.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
         //Chassis Motor Directions DO NOT CHANGE ANY OF THESE OR I WILL TOUCH YOU
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
+        launcher.setDirection(DcMotorEx.Direction.REVERSE);
 
         //See below
-        double[] launcherSpeedSizes = {0, 280, 560, 840, 1120, 1400, 1680, 1960, 2240, 2520, 2800,};
+        double[] launcherSpeedSizes = {0,1400, 1680, 2800};
         int stepIndex = 0;
         /*
         The code above this comment uses StepSizes to make "Launcher Modes" to help shoot more
@@ -82,16 +82,13 @@ public class BradysJavaOpMode extends LinearOpMode {
         telemetry.addData("BackRightMotorPower: ", backRight.getPower());
 
         //Launcher Intake and Power Telemetry Data
-        telemetry.addData("LauncherRightPower: ", launcherRight.getPower());
-        telemetry.addData("LauncherLeftPower: ", launcherLeft.getPower());
+        telemetry.addData("LauncherRightPower: ", launcher.getPower());
         telemetry.addData("IntakePower: ", intakeMotor.getPower());
 
         //Launcher and Intake RPM Telemetry Data
-        double launcherRightRPM = (launcherRight.getVelocity() / 28 * 60);
-        double launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
+        double launcherRPM = (launcher.getVelocity() / 28 * 60);
         double intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
-        telemetry.addData("LauncherRightRPM: ", launcherRightRPM);
-        telemetry.addData("LauncherLeftRPM: ", launcherLeftRPM);
+        telemetry.addData("LauncherRPM: ", launcherRPM);
         telemetry.addData("IntakeRPM: ", intakeRPM); //"max rpm of motor" * motor.getPower = current rpm
         telemetry.update(); // add more telemetry+ data above this line
 
@@ -118,17 +115,16 @@ public class BradysJavaOpMode extends LinearOpMode {
             if (aButton) {
                 stepIndex = (stepIndex + 1) % launcherSpeedSizes.length;
             }
-            if (bButton) {
+            /*if (bButton) {
                 stepIndex = (stepIndex - 1) % launcherSpeedSizes.length;
             }
+            */
             double currentSelectedLauncherVelocity = launcherSpeedSizes[stepIndex];
-            launcherRight.setVelocity(currentSelectedLauncherVelocity);
-            launcherLeft.setVelocity(-currentSelectedLauncherVelocity);
+            launcher.setVelocity(currentSelectedLauncherVelocity);
 
 
             /* Calculations for Intake and Launcher RPM  ↓ */
-            launcherRightRPM = (launcherRight.getVelocity() / 28 * 60);
-            launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
+            launcherRPM = (launcher.getVelocity() / 28 * 60);
             intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
 
             //Most beautiful calculations for intake ever >:) ↓ (Don't try to change it)
@@ -143,7 +139,7 @@ public class BradysJavaOpMode extends LinearOpMode {
             }
 
             //Launcher RPM Ready LED ↓
-            if (launcherLeftRPM >= stepIndex) {
+            if (launcherRPM >= stepIndex) {
                 gamepad1.setLedColor(0, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);
                 gamepad2.setLedColor(0,255,0, Gamepad.LED_DURATION_CONTINUOUS);
             } else {
@@ -172,10 +168,8 @@ public class BradysJavaOpMode extends LinearOpMode {
             telemetry.addData("BackLeftMotorPower: ", backLeft.getPower());
             telemetry.addData("BackRightMotorPower: ", backRight.getPower());
             //Launcher(s) Telemetry Data ↓
-            telemetry.addData("LauncherRightPower: ", launcherRight.getPower());
-            telemetry.addData("LauncherLeftPower: ", launcherLeft.getPower());
-            telemetry.addData("LauncherRightRPM: ", launcherRightRPM);
-            telemetry.addData("LauncherLeftRPM: ", launcherLeftRPM);
+            telemetry.addData("LauncherPower: ", launcher.getPower());
+            telemetry.addData("LauncherRPM: ", launcherRPM);
             telemetry.addData("LauncherVelocityMode: ", stepIndex);
             telemetry.addData("LauncherTargetVelocity: ", currentSelectedLauncherVelocity);
             //Intake Telemetry Data ↓
