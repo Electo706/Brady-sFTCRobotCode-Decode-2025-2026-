@@ -54,7 +54,7 @@ public class ChimmyClankerV2TeleOp extends LinearOpMode {
         1960 = Launcher at  70% Velocity/Speed (4200 RPM)
         2240 = Launcher at  80% Velocity/Speed (4800 RPM)
         2520 = Launcher at  90% Velocity/Speed (5400 RPM)
-        2800 = Launcher at 100% Velocity/Speed (6000 RPM AKA MAXED SPEED)
+        2800 = Launcher at 100% Velocity/Speed (6000 RPM AKA MAX SPEED)
 
 
         This code was inspired by code used in the PIDFTuning.java file made with the tutorial by
