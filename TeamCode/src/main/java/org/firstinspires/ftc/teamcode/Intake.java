@@ -11,10 +11,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 public class Intake {
-
     private DcMotorEx intakeMotor;
     double intakeRPM = (intakeMotor.getVelocity() / 384.5 * 60);
-
     public void init(HardwareMap hardwareMap) {
         intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
         intakeMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -30,11 +28,5 @@ public class Intake {
     }
     public void telem(Telemetry telemetry) {
         telemetry.addData("IntakeRPM: ", intakeRPM);
-        telemetry.update();
     }
-
-
-
-
-
 }
