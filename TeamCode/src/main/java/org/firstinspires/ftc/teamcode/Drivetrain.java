@@ -27,7 +27,7 @@ public class Drivetrain {
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-    public void power(float lStickY, float lStickX, float rStickX) {
+    public void run(float lStickY, float lStickX, float rStickX) {
         frontLeft.setPower(lStickY + lStickX - rStickX); // -1.0 - 1.0 power level (sent from Joysticks)
         backLeft.setPower(-lStickX - rStickX - rStickX);
         frontRight.setPower(lStickX - rStickX - rStickX);

@@ -37,7 +37,7 @@ public class Launcher {
     double launcherRightRPM = (launcherRight.getVelocity() / 28 * 60);
     double launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
 
-    public void setLauncherSpeed(double rightTriggerInput,double leftTriggerInput,
+    public void run(double rightTriggerInput,double leftTriggerInput,
                                  boolean aButtonPressed, boolean bButtonPressed) {
         if (aButtonPressed && speedSetting < launcherSpeedSizes.length -1) {
             speedSetting++;
