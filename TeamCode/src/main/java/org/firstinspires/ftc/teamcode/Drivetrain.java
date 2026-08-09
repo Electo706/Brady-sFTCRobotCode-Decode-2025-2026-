@@ -38,6 +38,5 @@ public class Drivetrain {
         telemetry.addData("FrontRightMotorPower: ", frontRight.getPower());
         telemetry.addData("BackLeftMotorPower: ", backLeft.getPower());
         telemetry.addData("BackRightMotorPower: ", backRight.getPower());
-        telemetry.update();
     }
 }

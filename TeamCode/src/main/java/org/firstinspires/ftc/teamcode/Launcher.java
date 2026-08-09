@@ -12,7 +12,6 @@ public class Launcher {
     private DcMotorEx launcherLeft;
 
     public void init(HardwareMap hardwareMap) {
-
         launcherRight = hardwareMap.get(DcMotorEx.class, "launcherRight");
         launcherLeft = hardwareMap.get(DcMotorEx.class, "launcherLeft");
         launcherLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -38,7 +37,7 @@ public class Launcher {
     double launcherLeftRPM = (launcherLeft.getVelocity() / 28 * 60);
 
     public void run(double rightTriggerInput,double leftTriggerInput,
-                                 boolean aButtonPressed, boolean bButtonPressed) {
+                    boolean aButtonPressed, boolean bButtonPressed) {
         if (aButtonPressed && speedSetting < launcherSpeedSizes.length -1) {
             speedSetting++;
         }
@@ -55,7 +54,6 @@ public class Launcher {
         telemetry.addData("LauncherLeftRPM: ", launcherLeftRPM);
         telemetry.addData("LauncherVelocityMode: ", speedSetting);
         telemetry.addData("LauncherTargetVelocity: ", curSelLaunchVelo);
-        telemetry.update();
     }
     public void LED(boolean enabled, Gamepad gamepad1, Gamepad gamepad2) {
         if (launcherLeftRPM >= curSelLaunchVelo) {
@@ -66,7 +64,6 @@ public class Launcher {
             gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
             gamepad2.setLedColor(255,0,0, Gamepad. LED_DURATION_CONTINUOUS);
         }
-
     }
 
 
