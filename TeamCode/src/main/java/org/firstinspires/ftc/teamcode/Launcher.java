@@ -65,10 +65,4 @@ public class Launcher {
             gamepad2.setLedColor(255,0,0, Gamepad. LED_DURATION_CONTINUOUS);
         }
     }
-
-
-
-
-
-
 }

@@ -80,8 +80,6 @@ public class PIDFTuning extends OpMode {
         telemetry.addData("Tuning P: ", "%.4f (D-pad U/D)", P);
         telemetry.addData("Tuning F: ", "%.4f (D-Pad L/R)", F);
         telemetry.addData("StepSize: ", "%.4f (B Button)", stepSizes[stepIndex]);
-
-
     }
 
 }
